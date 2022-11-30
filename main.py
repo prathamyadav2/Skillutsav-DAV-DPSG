@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for
 import httpx
 import json
 import pandas as pd
@@ -62,21 +62,22 @@ def home():
 					f"{request.form.get('city-dropdown').title().strip()}, {request.form.get('state-dropdown').title().strip()}, India"
 				]
 			)
-			
+
+
 			if rainfall > 175 and rainfall <250:
 				rainfall2 = 1
 			if rainfall >= 145 and rainfall <= 175:
 				rainfall2 = 0
 			if rainfall < 145 or rainfall > 225:
 				rainfall2 = -1
-			
+
 			if float(weather['temperature']) >= 21 and float(weather['temperature']) <=27:
 				temperature2 = 1
 			if float(weather['temperature']) < 21:
 				temperature2 = -1
 			if float(weather['temperature']) >27:
 				temperature2 = -1
-			
+
 			if float(weather['humidity']) >= 80 :
 				humidity2 = 1
 			if float(weather['humidity']) < 80 and float(weather['humidity']) >= 70:
@@ -84,17 +85,16 @@ def home():
 			if float(weather['humidity']) < 70:
 				humidity2 = -1
 
-			
 			if float(request.form.get('ph-entry')) >= 6 and float(request.form.get('ph-entry'))<=7 :
 				ph2 = 1
 			if float(request.form.get('ph-entry')) < 6:
 				ph2 = -10**(6 - float(request.form.get('ph-entry')))
 			if float(request.form.get('ph-entry')) > 7:
 				ph2 = -10**(float(request.form.get('ph-entry')) - 7)
-    
+
+
 			fertility = sum([rainfall2, temperature2, humidity2, ph2, float(request.form.get('nitrogen-entry')), float(request.form.get('phosphorus-entry')), float(request.form.get('potassium-entry'))])
 
-			print(fertility)
 
 			return redirect(url_for('prediction', crop = prediction, fertility = round(fertility, 2), pdata = pdata_text))
 
@@ -108,7 +108,7 @@ def home():
 @app.route('/prediction', methods = [ 'GET' ])
 def prediction():
     return render_template('prediction.html', crop = request.args.get('crop'), fertility = request.args.get('fertility'), pdata = request.args.get('pdata'))
-	
+
 
 
 if __name__ == '__main__':
