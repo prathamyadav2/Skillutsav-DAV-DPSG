@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+    Crop Predicter
+{% endblock %}
+
+
+{% block stylesheets %}
+
+    <link
+        rel = "stylesheet"
+        href = "static/css/home.css"
+    />
+
+{% endblock %}
+
+
+{% block content %}
+
+    <div class = "form-bg">
+        <form method = 'POST'>
+
+            <div class = "title">Crop Predicter</div>
+
+            <div class = "custom-input s1">
+                <input
+                    id = "nitrogen-entry"
+                    name = "nitrogen-entry"
+                    class = "input"
+                    type = "number"
+                    step = "0.01"
+                    placeholder = " "
+                />
+                <div class = "cut"></div>
+                <label for = "nitrogen-entry" class = "placeholder">Nitrogen</label>
+            </div>
+
+            <div class="custom-input s2">
+                <input
+                    id = "phosphorus-entry"
+                    name = "phosphorus-entry"
+                    class = "input"
+                    type = "number"
+                    step = "0.01"
+                    placeholder = " "
+                />
+                <div class = "cut"></div>
+                <label for = "phosphorus-entry" class = "placeholder">Phosphorus</label>
+            </div>
+
+            <div class = "custom-input s2">
+                <input
+                    id = "potassium-entry"
+                    name = "potassium-entry"
+                    class = "input"
+                    type = "number"
+                    step = "0.01"
+                    placeholder = " "
+                />
+                <div class = "cut"></div>
+                <label for = "potassium-entry" class = "placeholder">Potassium</label>
+            </div>
+
+            <div class = "custom-input s2">
+                <input
+                    id = "ph-entry"
+                    name = "ph-entry"
+                    class = "input"
+                    type = "number"
+                    step = "0.01"
+                    placeholder = " "
+                />
+                <div class = "cut"></div>
+                <label for = "ph-entry" class = "placeholder">pH</label>
+            </div>
+
+            <div class = "s2">
+                <select
+                    onchange = "get_cities('city-dropdown', this.value);"
+                    id = "state-dropdown"
+                    name = "state-dropdown"
+                    class = "custom-dropdown"
+                    required
+                >
+                <option style = "display:none;" selected>Select State</option>
+                </select>
+            </div>
+
+            <div class = "s2">
+                <select
+                    id = "city-dropdown"
+                    name = "city-dropdown"
+                    class = "custom-dropdown"
+                    required
+                >
+                <option style = "display:none;" selected>Select City</option>
+                </select>
+
+                <script language = "javascript">
+                    get_states("state-dropdown");
+                </script>
+            </div>
+
+            <button type = "text" class = "submit">Predict</button>
+
+        </form>
+    </div>
+
+{% endblock %}
