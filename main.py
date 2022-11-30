@@ -62,8 +62,6 @@ def home():
 					f"{request.form.get('city-dropdown').title().strip()}, {request.form.get('state-dropdown').title().strip()}, India"
 				]
 			)
-   
-			df = pd.read_csv("./static/datasets/raw_data.csv")
 			
 			if rainfall > 175 and rainfall <250:
 				rainfall2 = 1
